@@ -57,6 +57,7 @@ class TrpCageImplicit(TestSystem):
 
         self.topology  = modeller.getTopology()
         self.positions = modeller.getPositions() # asNumpy=True
+        self.positions._value = np.array(self.positions._value)
         self.system    = forcefield.createSystem(modeller.topology,implicitSolvent=app.OBC1,
                                          constraints=constraints,nonbondedMethod=app.NoCutoff,
                                          hydrogenMass=hydrogenMass)
@@ -76,6 +77,7 @@ class BarnaseVacuum(TestSystem):
 
         self.topology  = modeller.getTopology()
         self.positions = modeller.getPositions() # asNumpy=True
+        self.positions._value = np.array(self.positions._value)
         self.system    = forcefield.createSystem(modeller.topology,implicitSolvent=None,
                                          constraints=constraints,nonbondedMethod=app.NoCutoff,
                                          hydrogenMass=hydrogenMass)
@@ -94,6 +96,7 @@ class BarstarVacuum(TestSystem):
 
         self.topology  = modeller.getTopology()
         self.positions = modeller.getPositions() # asNumpy=True
+        self.positions._value = np.array(self.positions._value)
         self.system    = forcefield.createSystem(modeller.topology,implicitSolvent=None,
                                          constraints=constraints,nonbondedMethod=app.NoCutoff,
                                          hydrogenMass=hydrogenMass)
@@ -112,6 +115,7 @@ class BarstarVacuum(TestSystem):
 
         self.topology  = modeller.getTopology()
         self.positions = modeller.getPositions() # asNumpy=True
+        self.positions._value = np.array(self.positions._value)
         self.system    = forcefield.createSystem(modeller.topology,implicitSolvent=None,
                                          constraints=constraints,nonbondedMethod=app.NoCutoff,
                                          hydrogenMass=hydrogenMass)
@@ -136,6 +140,7 @@ class BarnaseBarstarVacuum(TestSystem):
 
         self.topology  = modeller_complex.getTopology()
         self.positions = modeller_complex.getPositions() # asNumpy=True
+        self.positions._value = np.array(self.positions._value)
         self.system    = forcefield.createSystem(modeller_complex.topology,implicitSolvent=None,
                                          constraints=constraints,nonbondedMethod=app.NoCutoff,
                                          hydrogenMass=hydrogenMass)
