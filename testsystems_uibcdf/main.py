@@ -8,10 +8,11 @@ import nglview
 from openmmtools.testsystems import TestSystem as _ommtools_TestSystem
 
 
-_systems_names=[ 'TrpCageImplicit',
+_systems_names=[ 'TrpCageVacuum','TrpCageImplicit',
                  'BarnaseVacuum',
                  'BarstarVacuum',
-                 'BarnaseBarstarVacuum'
+                 'BarnaseBarstarVacuum',
+                 'CB7B2Vacuum','CB7B2Implicit'
 ]
 
 def _make_nglview(topology=None,positions=None):
@@ -62,6 +63,64 @@ class TrpCageImplicit(TestSystem):
                                          constraints=constraints,nonbondedMethod=app.NoCutoff,
                                          hydrogenMass=hydrogenMass)
 
+    pass
+
+class CB7B2Vacuum(TestSystem):
+
+    def __init__(self, constraints=app.HBonds, hydrogenMass=None, pH=7.0, **kwargs):
+
+        TestSystem.__init__(self, **kwargs)
+
+        from openmmtools.testsystems import HostGuestVacuum as _omm_HostGuestVacuum
+
+        tmp_testsystem=_omm_HostGuestVacuum()
+
+        self.topology = tmp_testsystem.topology
+        self.positions = tmp_testsystem.positions
+        self.positions._value = np.array(self.positions._value)
+        self.system   = tmp_testsystem.system
+
+        del(tmp_testsystem,_omm_HostGuestVacuum)
+
+    pass
+
+class CB7B2Implicit(TestSystem):
+
+    def __init__(self,constraints=app.HBonds, hydrogenMass=None, pH=7.0, **kwargs):
+
+        TestSystem.__init__(self, **kwargs)
+
+        from openmmtools.testsystems import HostGuestImplicit as _omm_HostGuestImplicit
+
+        tmp_testsystem=_omm_HostGuestImplicit()
+
+        self.topology = tmp_testsystem.topology
+        self.positions = tmp_testsystem.positions
+        self.positions._value = np.array(self.positions._value)
+        self.system   = tmp_testsystem.system
+
+        del(tmp_testsystem,_omm_HostGuestImplicit)
+
+    pass
+
+class BarnaseVacuum(TestSystem):
+
+    def __init__(self,constraints=app.HBonds, hydrogenMass=None, pH=7.0, **kwargs):
+
+        TestSystem.__init__(self, **kwargs)
+
+        system_pdb=PDBFixer(os.path.dirname(__file__)+"/pdbs/Barnase.pdb")
+
+        forcefield = app.ForceField('amber14-all.xml')
+        modeller = app.Modeller(system_pdb.topology, system_pdb.positions)
+        addHs_log = modeller.addHydrogens(forcefield, pH=pH)
+
+        self.topology  = modeller.getTopology()
+        self.positions = modeller.getPositions() # asNumpy=True
+        self.positions._value = np.array(self.positions._value)
+        self.system   = tmp_testsystem.system
+
+    pass
 
 class BarnaseVacuum(TestSystem):
 
