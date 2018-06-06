@@ -1,4 +1,12 @@
-## Instructions
+# Instructions
+
+## Conda packages required
+
+```bash
+conda install anaconda-client conda-build
+```
+
+## Building and pushing to https://anaconda.org/uibcdf
 
 ```bash
 conda config --set anaconda_upload no
@@ -10,5 +18,5 @@ conda build purge
 anaconda logout
 ```
 
-### Source
+## Additional Info
 https://docs.anaconda.com/anaconda-cloud/user-guide/tasks/work-with-packages
