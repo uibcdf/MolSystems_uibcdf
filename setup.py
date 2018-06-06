@@ -1,18 +1,17 @@
 import distutils.extension
 from setuptools import setup
 
-DOCLINES = __doc__.split("\n")
-
 setup(
     name='testsystems_uibcdf',
-    version=__version__,
+    version='0.1.1',
     author='UIBCDF Lab',
     author_email='uibcdf@gmail.com',
     packages=['testsystems_uibcdf'],
-    scripts=['bin/stowe-towels.py','bin/wash-towels.py'],
+    package_dir={'testsystems_uibcdf': 'testsystems_uibcdf'},
+    package_data={'testsystems_uibcdf': ['pdbs/*.pdb']},
     url='http://uibcdf.org',
-    download_url ='https://github.com/uibcdf/TestSystems_uibcdf'
+    download_url ='https://github.com/uibcdf/TestSystems_uibcdf',
     license='MIT',
-    description=DOCLINES[0],
-    long_description="\n".join(DOCLINES[2:]),
+    description="doc to be done",
+    long_description="long doc to be done",
 )
