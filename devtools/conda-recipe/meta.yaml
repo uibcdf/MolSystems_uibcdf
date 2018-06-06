@@ -1,19 +1,16 @@
 package:
   name: testsystems_uibcdf
-  # version: {{ GIT_DESCRIBE_TAG }}
-  version: 0.0.0
+  version: 0.11
 
 source:
   path: ../../
 
 build:
-  # number: {{ GIT_DESCRIBE_NUMBER }}
   number: 0
 
 requirements:
   build:
     - python
-    # - cython
     - setuptools
 
   run:
